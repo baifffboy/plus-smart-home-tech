@@ -1,5 +1,6 @@
-package model.hub;
+package ru.yandex.practicum.telemetry.collector.model.hub;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import lombok.ToString;
 @ToString(callSuper = true)
 public class ScenarioRemovedEvent extends HubEvent {
     @Size(min = 3)
+    @NotBlank
     private String name;
 
     @Override

@@ -1,4 +1,4 @@
-package model.sensor;
+package ru.yandex.practicum.telemetry.collector.model.sensor;
 
 public enum SensorEventType {
     CLIMATE_SENSOR_EVENT,
