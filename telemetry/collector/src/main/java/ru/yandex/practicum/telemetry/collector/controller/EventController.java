@@ -1,7 +1,9 @@
 package ru.yandex.practicum.telemetry.collector.controller;
 
 import jakarta.validation.Valid;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,9 +15,10 @@ import ru.yandex.practicum.telemetry.collector.service.CollectorService;
 @RestController
 @RequestMapping("/events")
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EventController {
 
-    private final CollectorService service;
+    CollectorService service;
 
     @PostMapping("/sensors")
     public void collectSensorEvent(@Valid @RequestBody SensorEvent event) {

@@ -1,6 +1,8 @@
 package ru.yandex.practicum.telemetry.collector.service;
 
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
@@ -18,18 +20,19 @@ import ru.yandex.practicum.telemetry.collector.model.sensor.SensorEvent;
 @Service
 @Slf4j
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CollectorServiceImpl implements CollectorService {
 
-    private final KafkaProducer<String, SpecificRecordBase> producer;
-    private final SensorEventMapper sensorEventMapper;
-    private final HubEventMapper hubEventMapper;
+    KafkaProducer<String, SpecificRecordBase> producer;
+    SensorEventMapper sensorEventMapper;
+    HubEventMapper hubEventMapper;
 
     @Override
     public void collectSensorEvent(SensorEvent event) {
         SensorEventAvro avro = sensorEventMapper.toAvro(event);
 
         ProducerRecord<String, SpecificRecordBase> record =
-                new ProducerRecord<>(KafkaTopics.SENSORS_TOPIC, avro.getId().toString(), avro);
+                new ProducerRecord<>(KafkaTopics.SENSORS_TOPIC, avro.getId(), avro);
 
         producer.send(record, (metadata, exception) -> {
             if (exception != null) {
@@ -46,7 +49,7 @@ public class CollectorServiceImpl implements CollectorService {
         HubEventAvro avro = hubEventMapper.toAvro(event);
 
         ProducerRecord<String, SpecificRecordBase> record =
-                new ProducerRecord<>(KafkaTopics.HUBS_TOPIC, avro.getHubId().toString(), avro);
+                new ProducerRecord<>(KafkaTopics.HUBS_TOPIC, avro.getHubId(), avro);
 
         producer.send(record, (metadata, exception) -> {
             if (exception != null) {

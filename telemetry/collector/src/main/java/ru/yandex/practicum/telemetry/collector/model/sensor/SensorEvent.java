@@ -4,9 +4,11 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 import java.time.Instant;
 
@@ -26,14 +28,15 @@ import java.time.Instant;
 @Getter
 @Setter
 @ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public abstract class SensorEvent {
     @NotBlank
-    private String id;
+    String id;
 
     @NotBlank
-    private String hubId;
+    String hubId;
 
-    private Instant timestamp = Instant.now();
+    Instant timestamp = Instant.now();
 
     @NotNull
     public abstract SensorEventType getType();

@@ -24,42 +24,42 @@ public class SensorEventMapper {
                 .build();
     }
 
-    private ClimateSensorAvro toClimateAvro(ClimateSensorEvent e) {
+    private ClimateSensorAvro toClimateAvro(ClimateSensorEvent event) {
         return ClimateSensorAvro.newBuilder()
-                .setTemperatureC(e.getTemperatureC())
-                .setHumidity(e.getHumidity())
-                .setCo2Level(e.getCo2Level())
+                .setTemperatureC(event.getTemperatureC())
+                .setHumidity(event.getHumidity())
+                .setCo2Level(event.getCo2Level())
                 .build();
     }
 
-    private LightSensorAvro toLightAvro(LightSensorEvent e) {
+    private LightSensorAvro toLightAvro(LightSensorEvent event) {
         return LightSensorAvro.newBuilder()
-                .setLinkQuality(e.getLinkQuality())
-                .setLuminosity(e.getLuminosity())
+                .setLinkQuality(event.getLinkQuality())
+                .setLuminosity(event.getLuminosity())
                 .build();
     }
 
-    private MotionSensorAvro toMotionAvro(MotionSensorEvent e) {
+    private MotionSensorAvro toMotionAvro(MotionSensorEvent event) {
         return MotionSensorAvro.newBuilder()
-                .setLinkQuality(e.getLinkQuality())
-                .setMotion(e.isMotion())
-                .setVoltage(e.getVoltage())
+                .setLinkQuality(event.getLinkQuality())
+                .setMotion(event.isMotion())
+                .setVoltage(event.getVoltage())
                 .build();
     }
 
-    private SwitchSensorAvro toSwitchAvro(SwitchSensorEvent e) {
+    private SwitchSensorAvro toSwitchAvro(SwitchSensorEvent event) {
         return SwitchSensorAvro.newBuilder()
-                .setState(e.getState())
+                .setState(event.getState())
                 .build();
     }
 
-    private TemperatureSensorAvro toTemperatureAvro(TemperatureSensorEvent e) {
+    private TemperatureSensorAvro toTemperatureAvro(TemperatureSensorEvent event) {
         return TemperatureSensorAvro.newBuilder()
-                .setId(e.getId())
-                .setHubId(e.getHubId())
-                .setTimestamp(e.getTimestamp())
-                .setTemperatureC(e.getTemperatureC())
-                .setTemperatureF(e.getTemperatureF())
+                .setId(event.getId())
+                .setHubId(event.getHubId())
+                .setTimestamp(event.getTimestamp())
+                .setTemperatureC(event.getTemperatureC())
+                .setTemperatureF(event.getTemperatureF())
                 .build();
     }
 }

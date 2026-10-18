@@ -24,55 +24,55 @@ public class HubEventMapper {
                 .build();
     }
 
-    private DeviceAddedEventAvro toDeviceAdded(DeviceAddedEvent e) {
+    private DeviceAddedEventAvro toDeviceAdded(DeviceAddedEvent event) {
         return DeviceAddedEventAvro.newBuilder()
-                .setId(e.getId())
-                .setType(DeviceTypeAvro.valueOf(e.getDeviceType().name()))
+                .setId(event.getId())
+                .setType(DeviceTypeAvro.valueOf(event.getDeviceType().name()))
                 .build();
     }
 
-    private DeviceRemovedEventAvro toDeviceRemoved(DeviceRemovedEvent e) {
+    private DeviceRemovedEventAvro toDeviceRemoved(DeviceRemovedEvent event) {
         return DeviceRemovedEventAvro.newBuilder()
-                .setId(e.getId())
+                .setId(event.getId())
                 .build();
     }
 
-    private ScenarioAddedEventAvro toScenarioAdded(ScenarioAddedEvent e) {
-        List<ScenarioConditionAvro> conditions = e.getConditions().stream()
+    private ScenarioAddedEventAvro toScenarioAdded(ScenarioAddedEvent event) {
+        List<ScenarioConditionAvro> conditions = event.getConditions().stream()
                 .map(this::toCondition)
                 .toList();
 
-        List<DeviceActionAvro> actions = e.getActions().stream()
+        List<DeviceActionAvro> actions = event.getActions().stream()
                 .map(this::toAction)
                 .toList();
 
         return ScenarioAddedEventAvro.newBuilder()
-                .setName(e.getName())
+                .setName(event.getName())
                 .setConditions(conditions)
                 .setActions(actions)
                 .build();
     }
 
-    private ScenarioRemovedEventAvro toScenarioRemoved(ScenarioRemovedEvent e) {
+    private ScenarioRemovedEventAvro toScenarioRemoved(ScenarioRemovedEvent event) {
         return ScenarioRemovedEventAvro.newBuilder()
-                .setName(e.getName())
+                .setName(event.getName())
                 .build();
     }
 
-    private ScenarioConditionAvro toCondition(ScenarioCondition c) {
+    private ScenarioConditionAvro toCondition(ScenarioCondition condition) {
         return ScenarioConditionAvro.newBuilder()
-                .setSensorId(c.getSensorId())
-                .setType(ConditionTypeAvro.valueOf(c.getType().name()))
-                .setOperation(ConditionOperationAvro.valueOf(c.getOperation().name()))
-                .setValue(c.getValue())
+                .setSensorId(condition.getSensorId())
+                .setType(ConditionTypeAvro.valueOf(condition.getType().name()))
+                .setOperation(ConditionOperationAvro.valueOf(condition.getOperation().name()))
+                .setValue(condition.getValue())
                 .build();
     }
 
-    private DeviceActionAvro toAction(DeviceAction a) {
+    private DeviceActionAvro toAction(DeviceAction action) {
         return DeviceActionAvro.newBuilder()
-                .setSensorId(a.getSensorId())
-                .setType(ActionTypeAvro.valueOf(a.getType().name()))
-                .setValue(a.getValue())
+                .setSensorId(action.getSensorId())
+                .setType(ActionTypeAvro.valueOf(action.getType().name()))
+                .setValue(action.getValue())
                 .build();
     }
 }

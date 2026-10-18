@@ -1,21 +1,24 @@
 package ru.yandex.practicum.telemetry.collector.model.hub;
 
 import jakarta.validation.constraints.NotNull;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import lombok.experimental.FieldDefaults;
 
 @Getter
 @Setter
 @ToString
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class ScenarioCondition {
-    private String sensorId;
+    String sensorId;
 
     @NotNull
-    private ScenarioConditionType type;
+    ScenarioConditionType type;
 
     @NotNull
-    private ScenarioConditionOperation operation;
+    ScenarioConditionOperation operation;
 
-    private Integer value;
+    Integer value;
 }
