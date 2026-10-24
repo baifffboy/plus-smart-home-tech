@@ -8,14 +8,13 @@ import org.apache.avro.specific.SpecificRecordBase;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.stereotype.Service;
+import ru.yandex.practicum.grpc.telemetry.event.HubEventProto;
+import ru.yandex.practicum.grpc.telemetry.event.SensorEventProto;
 import ru.yandex.practicum.kafka.telemetry.event.HubEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.SensorEventAvro;
 import ru.yandex.practicum.telemetry.collector.config.KafkaTopics;
 import ru.yandex.practicum.telemetry.collector.mapper.HubEventMapper;
 import ru.yandex.practicum.telemetry.collector.mapper.SensorEventMapper;
-import ru.yandex.practicum.telemetry.collector.model.hub.HubEvent;
-import ru.yandex.practicum.telemetry.collector.model.sensor.SensorEvent;
-
 
 @Service
 @Slf4j
@@ -28,7 +27,7 @@ public class CollectorServiceImpl implements CollectorService {
     HubEventMapper hubEventMapper;
 
     @Override
-    public void collectSensorEvent(SensorEvent event) {
+    public void collectSensorEvent(SensorEventProto event) {
         SensorEventAvro avro = sensorEventMapper.toAvro(event);
 
         ProducerRecord<String, SpecificRecordBase> record =
@@ -45,7 +44,7 @@ public class CollectorServiceImpl implements CollectorService {
     }
 
     @Override
-    public void collectHubEvent(HubEvent event) {
+    public void collectHubEvent(HubEventProto event) {
         HubEventAvro avro = hubEventMapper.toAvro(event);
 
         ProducerRecord<String, SpecificRecordBase> record =
