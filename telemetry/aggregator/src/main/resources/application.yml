@@ -1,0 +1,11 @@
+spring:
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: aggregator
+      auto-offset-reset: earliest
+
+logging:
+  level:
+    ru.yandex.practicum.aggregator: INFO
+    org.apache.kafka: WARN
