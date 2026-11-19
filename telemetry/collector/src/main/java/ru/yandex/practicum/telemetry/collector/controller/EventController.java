@@ -4,7 +4,9 @@ import com.google.protobuf.Empty;
 import io.grpc.Status;
 import io.grpc.StatusRuntimeException;
 import io.grpc.stub.StreamObserver;
+import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import net.devh.boot.grpc.server.service.GrpcService;
 import ru.yandex.practicum.grpc.telemetry.collector.CollectorControllerGrpc;
@@ -15,9 +17,10 @@ import ru.yandex.practicum.telemetry.collector.service.CollectorService;
 @GrpcService
 @Slf4j
 @RequiredArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class EventController extends CollectorControllerGrpc.CollectorControllerImplBase {
 
-    private final CollectorService service;
+    CollectorService service;
 
     @Override
     public void collectSensorEvent(SensorEventProto request,

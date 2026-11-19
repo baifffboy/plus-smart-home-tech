@@ -1,4 +1,4 @@
-package ru.yandex.practicum.telemetry.collector.config;
+package ru.yandex.practicum.kafka.common.config;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
