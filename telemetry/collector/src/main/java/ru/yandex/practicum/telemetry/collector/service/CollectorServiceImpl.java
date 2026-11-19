@@ -10,9 +10,10 @@ import org.apache.kafka.clients.producer.ProducerRecord;
 import org.springframework.stereotype.Service;
 import ru.yandex.practicum.grpc.telemetry.event.HubEventProto;
 import ru.yandex.practicum.grpc.telemetry.event.SensorEventProto;
+import ru.yandex.practicum.kafka.common.config.KafkaTopics;
 import ru.yandex.practicum.kafka.telemetry.event.HubEventAvro;
 import ru.yandex.practicum.kafka.telemetry.event.SensorEventAvro;
-import ru.yandex.practicum.telemetry.collector.config.KafkaTopics;
+
 import ru.yandex.practicum.telemetry.collector.mapper.HubEventMapper;
 import ru.yandex.practicum.telemetry.collector.mapper.SensorEventMapper;
 

@@ -4,8 +4,8 @@ services:
     hostname: kafka
     container_name: kafka
     ports:
-      - "9092:9092" # for client connections
-      - "9101:9101" # JMX
+      - "9092:9092"
+      - "9101:9101"
     restart: unless-stopped
     environment:
       KAFKA_NODE_ID: 1
@@ -49,7 +49,5 @@ services:
       timeout: 5s
       interval: 5s
       retries: 10
-    #    volumes:
-    #      - postgres:/data/postgres
     ports:
       - "5432:5432"
